@@ -32,7 +32,25 @@ doubleTree = treeMap (*2)  -- doubles each value in tree
 sumTree = treeFold (+) id -- sum of the leaf values in tree
 fringeTree = treeFold (++) (: [])  -- list of the leaves of tree
 
-{- Contrived datatype -}
+{- 
+Contrived datatype provided by book.
+
+Trying to make it lest contrived by implementing
+some of my own structure by making it a small coin
+calculator.  Added data Coin and pennies.
+-}
+
+data Coin = Penny
+          | Nickel
+          | Dime
+          | Quarter
+
+pennies :: Coin -> Int
+pennies Penny = 1
+pennies Nickel = 5
+pennies Dime = 10
+pennies Quarter = 25
+
 
 data Weird a b = First a
                | Second b
@@ -48,23 +66,27 @@ weirdMap fa fb = g
     g (Third z) = Third ( map (\(x, y) -> (fa x, fb y) ) z)      
     g (Fourth w)  = Fourth (g w) 
     
-weirdFa1 = (+) 1
+weirdFa1 coin = pennies coin
 weirdFb1 = (+) (-1)
 
-weirdFc1 :: Num c => [(c, c)] -> c
+weirdFc1 :: [(Coin, Int)] -> Int
 weirdFc1 = sum . thirds
   where
     thirds = map sumTuple
       where
-        sumTuple (x, y) = x + y
+        sumTuple (coin, y) = (pennies coin) * y
     
-weirdFd1 = (+) 25
+make_dollar = 60
+weirdFd1 = (+) make_dollar
 
 
-weirdFirst1 = First 10
-weirdSecond1 = Second 10
-weirdThird1 = Third [(10, 20), (20,30)]
-weirdFourth1 = Fourth (Third [(10, 20), (20,30)])
+weirdFirst1 = First Nickel
+weirdSecond1 = Second 5
+
+-- Each Tuple contains coin type and how many there are
+weirdThird1 = Third [(Dime, 3), (Quarter, 2)]
+
+weirdFourth1 = Fourth (Third [(Nickel, 2), (Dime,3)])
 
 weirdFold :: (a -> c) -> (b -> c) -> ([(a,b)] -> c) -> (c -> c) -> Weird a b -> c
 weirdFold f1 f2 f3 f4 = g

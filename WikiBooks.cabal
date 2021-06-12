@@ -10,19 +10,19 @@ extra-source-files:
 executable WikiBooks
     main-is: Main.hs
     other-modules:
-        Monads.IoApplicativeFunctor
-        Monads.UnderstandMonads
-        IntermediateHaskell.ClassesAndTypes
-        IntermediateHaskell.HaskelModules
-        IntermediateHaskell.OtherDataStructures
-        IntermediateHaskell.Indentation
-        IntermediateHaskell.StandalonePrograms
-        ElementaryHaskell.ControlStructures
-        ElementaryHaskell.TypeDeclarations
         ElementaryHaskell.PatternMatching
         ElementaryHaskell.Recursion
-        ElementaryHaskell.Lists3
+        ElementaryHaskell.TypeDeclarations
         ElementaryHaskell.Lists2
+        ElementaryHaskell.Lists3
+        ElementaryHaskell.ControlStructures
+        IntermediateHaskell.StandalonePrograms
+        IntermediateHaskell.Indentation
+        IntermediateHaskell.HaskelModules
+        IntermediateHaskell.ClassesAndTypes
+        IntermediateHaskell.OtherDataStructures
+        Monads.UnderstandMonads
+        Monads.IoApplicativeFunctor
     default-language: Haskell2010
     build-depends:
         base -any
