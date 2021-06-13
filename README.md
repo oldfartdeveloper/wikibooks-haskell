@@ -12,10 +12,10 @@ In [OtherDataStructure.hs](https://github.com/oldfartdeveloper/wikibooks-haskell
 
 You can see it in action by firing up the Haskell repl and running the following:
 
-| Command                                                     | Result |
-|-------------------------------------------------------------|--------|
-| `weirdMap weirdFa1 weirdFb1 weirdSecond1`                   | **4**  |
-| `weirdFold weirdFa1 weirdFb1 weirdFc1 weirdFd1 weirdThird1` | **80** |
-| `weirdFold weirdFa1 weirdFb1 weirdFc1 weirdFd1   weirdFourth1` | **100** |
+| Command                                                      | Result  |
+|--------------------------------------------------------------|---------|
+| `weirdMap weirdFa1 weirdFb1 weirdSecond1`                    | **4**   |
+| `weirdFold weirdFa1 weirdFb1 weirdFc1 weirdFd1 weirdThird1`  | **80**  |
+| `weirdFold weirdFa1 weirdFb1 weirdFc1 weirdFd1 weirdFourth1` | **100** |
 
 It really helped me.
