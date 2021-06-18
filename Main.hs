@@ -7,8 +7,8 @@ import Prelude
 import IntermediateHaskell.StandalonePrograms (mainX)
 import IntermediateHaskell.Indentation (doGuessing')
 import Monads.IoApplicativeFunctor (interactiveDoubling, interactiveSumming, interactiveConcatenating, interactiveConcatenating')
+import Monads.DoNotation (nameDo, nameLambda, greetAndSeeYou, nameReturnAndCarryOn)
 
 main :: IO ()
 main = do
-  interactiveConcatenating'
-  
+  nameReturnAndCarryOn
