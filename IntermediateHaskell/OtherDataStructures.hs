@@ -44,6 +44,7 @@ data Coin = Penny
           | Nickel
           | Dime
           | Quarter
+  deriving (Show)
 
 pennies :: Coin -> Int
 pennies Penny = 1
