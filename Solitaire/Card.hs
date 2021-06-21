@@ -9,8 +9,16 @@ import Prelude
   is in module Location (probably -- TODO)
 -}
 
-data Card = Rank Suit
+import Data.List as List
+  
+data Deck = List Card
 
+data Card = Card
+  { suit :: Suit
+  , rank :: Rank
+  , color :: Color
+  }
+  
 data Rank -- from lowest to highest
   = Ace
   | Two
@@ -40,11 +48,6 @@ data Color
   = Black
   | Red
   deriving (Enum, Bounded)
-  
-color :: Suit -> Color
-color Diamond = Red
-color Heart = Red
-color _ = Black
 
 oppositeColor :: Color -> Color
 oppositeColor Black = Red
