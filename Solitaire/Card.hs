@@ -10,14 +10,12 @@ import Prelude
 -}
 
 import Data.List as List
-  
-data Deck = List Card
 
 data Card = Card
   { suit :: Suit
   , rank :: Rank
   , color :: Color
-  }
+  } deriving (Show)
   
 data Rank -- from lowest to highest
   = Ace
@@ -33,7 +31,7 @@ data Rank -- from lowest to highest
   | Jack
   | Queen
   | King
-  deriving (Eq, Ord, Enum, Bounded)
+  deriving (Eq, Ord, Enum, Bounded, Show)
 
 -- see https://en.wikipedia.org/wiki/High_card_by_suit
 -- (but suit order isn't important in Solitaire):
@@ -42,12 +40,16 @@ data Suit
   | Diamond
   | Heart
   | Spade
-  deriving (Eq, Enum, Bounded)
+  deriving (Eq, Enum, Bounded, Show)
   
 data Color
   = Black
   | Red
-  deriving (Enum, Bounded)
+  deriving (Enum, Bounded, Show)
+  
+deck :: [Card]
+deck = 
+  []
 
 oppositeColor :: Color -> Color
 oppositeColor Black = Red
