@@ -7,8 +7,6 @@ module Solitaire.Card where
   is in module Location (probably -- TODO)
 -}
 
-import Data.List as List
-
 data Card = Card { suit :: Suit
   , rank :: Rank
   , color :: Color
@@ -29,7 +27,7 @@ data Rank -- from lowest to highest
   | Queen
   | King
   deriving (Eq, Ord, Enum, Bounded, Show)
-
+  
 -- see https://en.wikipedia.org/wiki/High_card_by_suit
 -- (but suit order isn't important in Solitaire):
 data Suit
