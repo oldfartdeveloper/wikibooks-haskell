@@ -1,5 +1,7 @@
 module Solitaire.Card where
   
+{-# LANGUAGE ScopedTypeVariables #-}
+
 import Prelude
 
 {-
@@ -11,12 +13,11 @@ import Prelude
 
 import Data.List as List
 
-data Card = Card
-  { suit :: Suit
+data Card = Card { suit :: Suit
   , rank :: Rank
   , color :: Color
   } deriving (Show)
-  
+
 data Rank -- from lowest to highest
   = Ace
   | Two
@@ -47,9 +48,23 @@ data Color
   | Red
   deriving (Enum, Bounded, Show)
   
+
 deck :: [Card]
 deck = 
-  []
+  makeDeck
+    [(minBound :: Suit) .. (maxBound :: Suit)]
+    [(minBound :: Rank) .. (maxBound :: Rank)]
+    where
+      makeDeck suits ranks =
+        [ Card { suit = suit', rank = rank', color = getColor suit' }
+          | suit' <- suits
+          , rank' <- ranks
+        ]   
+
+getColor :: Suit -> Color
+getColor Club = Black 
+getColor Spade = Black
+getColor _ = Red
 
 oppositeColor :: Color -> Color
 oppositeColor Black = Red
