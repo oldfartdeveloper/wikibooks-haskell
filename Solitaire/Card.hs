@@ -1,8 +1,4 @@
 module Solitaire.Card where
-  
-{-# LANGUAGE ScopedTypeVariables #-}
-
-import Prelude
 
 {-
   This describes the static behaviors of each of the
@@ -47,24 +43,20 @@ data Color
   = Black
   | Red
   deriving (Enum, Bounded, Show)
-  
 
-deck :: [Card]
-deck = 
-  makeDeck
-    [(minBound :: Suit) .. (maxBound :: Suit)]
-    [(minBound :: Rank) .. (maxBound :: Rank)]
+deck :: [Card] -- Cards are zero-indexed
+deck =
+  [ Card { suit = suit
+         , rank = rank
+         , color = getColor suit
+         }
+    | suit <- [minBound .. maxBound]
+    , rank <- [minBound .. maxBound]
+  ]
     where
-      makeDeck suits ranks =
-        [ Card { suit = suit', rank = rank', color = getColor suit' }
-          | suit' <- suits
-          , rank' <- ranks
-        ]   
-
-getColor :: Suit -> Color
-getColor Club = Black 
-getColor Spade = Black
-getColor _ = Red
+      getColor Club = Black 
+      getColor Spade = Black
+      getColor _ = Red
 
 oppositeColor :: Color -> Color
 oppositeColor Black = Red
