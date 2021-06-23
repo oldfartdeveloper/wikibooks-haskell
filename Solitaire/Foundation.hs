@@ -1,4 +1,4 @@
-module Solitaire.Foundation where
+module Solitaire.Foundation (Foundation, create, addCard, removeCard) where
   
 import Prelude
 
@@ -19,6 +19,8 @@ removeCard :: Foundation -> Card -> Foundation
 removeCard foundation card =
   manageCard Remove foundation card
   
+-- Items below are not exported:
+
 data CardAction
   = Add
   | Remove
