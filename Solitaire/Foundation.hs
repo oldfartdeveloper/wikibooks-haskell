@@ -10,11 +10,16 @@ type Foundation = [[Card]]
 create :: Foundation
 create = replicate (1 + fromEnum(maxBound :: Suit)) []
 
--- Add card to apropriate suit card list
+-- Add card to matching suit card list
 addCard :: Foundation -> Card -> Foundation
 addCard foundation card =
   manageCard Add foundation card
 
+-- Remove card from matching suit card list.
+-- NOTE: code does NOT check that card removed is
+--       the same as the card argument; assumes code
+--       structure is strong enough to not have to
+--       worry about this.
 removeCard :: Foundation -> Card -> Foundation
 removeCard foundation card =
   manageCard Remove foundation card
