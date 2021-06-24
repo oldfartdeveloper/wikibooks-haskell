@@ -8,7 +8,8 @@ import IntermediateHaskell.StandalonePrograms (mainX)
 import IntermediateHaskell.Indentation (doGuessing')
 import Monads.IoApplicativeFunctor (interactiveDoubling, interactiveSumming, interactiveConcatenating, interactiveConcatenating')
 import Monads.DoNotation (nameDo, nameLambda, greetAndSeeYou, nameReturnAndCarryOn)
+import Solitaire.AnsiColor (ansiDemo)
 
 main :: IO ()
 main = do
-  nameReturnAndCarryOn
+  ansiDemo
