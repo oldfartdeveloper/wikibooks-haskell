@@ -1,6 +1,6 @@
 module Solitaire.Card where
 
-import qualified System.Console.ANSI
+--import qualified System.Console.ANSI
 
 {-
   This describes the static behaviors of each of the
@@ -38,7 +38,7 @@ instance Show Card where
           Jack -> " J"
           Queen -> " Q"
           King -> " K"
-    show (showRank ++ showSuit)
+    showRank ++ showSuit
 
 data Rank -- from lowest to highest
   = Ace
