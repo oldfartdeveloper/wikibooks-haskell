@@ -2,9 +2,12 @@ module Solitaire.Foundation (Foundation, create, addCard, removeCard) where
   
 import Prelude
 
-import Solitaire.Card (Card, Suit, deck, suit)
+import Data.Foldable (null)
 
-type Foundation = [[Card]]
+import Solitaire.Card (Card, Suit, Rank(..), deck, rank, suit)
+
+type Pile = [Card]
+type Foundation = [Pile]
 
 -- Create an empty foundation
 create :: Foundation
@@ -13,7 +16,7 @@ create = replicate (1 + fromEnum(maxBound :: Suit)) []
 -- Add card to matching suit card list
 addCard :: Foundation -> Card -> Foundation
 addCard foundation card =
-  manageCard Add foundation card
+  manageCard (\b t a -> b ++ [card : t] ++ a) foundation card
 
 -- Remove card from matching suit card list.
 -- NOTE: code does NOT check that card removed is
@@ -22,22 +25,31 @@ addCard foundation card =
 --       worry about this.
 removeCard :: Foundation -> Card -> Foundation
 removeCard foundation card =
-  manageCard Remove foundation card
+  manageCard (\b t a -> b ++ [tail t] ++ a) foundation card
+
+-- Answer whether a card can be added to the foundation.
+-- True if Ace's corresponding list is empty
+--   or if corresponding pile is card's predecessor
+-- otherwise False
+canReceiveCard :: Foundation -> Card -> Bool
+canReceiveCard foundation card = do
+  let
+    (_, result) = splitAt (suitOffset card) foundation
+    thisSuit = head result
+  if rank card == Ace
+  then null thisSuit
+  else (pred . rank) card == (rank . head) thisSuit
   
 -- Items below are not exported:
 
-data CardAction
-  = Add
-  | Remove
-
-manageCard :: CardAction -> Foundation -> Card -> Foundation
-manageCard action foundation card = do
+manageCard :: ([Pile] -> Pile -> [Pile] -> Foundation) ->
+  Foundation -> Card -> Foundation
+manageCard f foundation card = do
   let
-    suitOffset = fromEnum (suit card)
-    (beforeSuits, result) = splitAt suitOffset foundation
-    thisSuit = head result
-    afterSuits = tail result
-  case action of
-    Add -> beforeSuits ++ [card : thisSuit] ++ afterSuits
-    Remove -> beforeSuits ++ [ tail thisSuit] ++ afterSuits
+    (beforeSuits, rest) = splitAt (suitOffset card) foundation
+    thisSuit = head rest
+    afterSuits = tail rest
+  f beforeSuits thisSuit afterSuits
    
+suitOffset :: Card -> Int
+suitOffset card = (fromEnum . suit) card
