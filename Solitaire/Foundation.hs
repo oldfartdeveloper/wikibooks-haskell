@@ -34,10 +34,10 @@ removeCard foundation card =
 canReceiveCard :: Foundation -> Card -> Bool
 canReceiveCard foundation card = do
   let
-    thisSuit = (head . snd) (splitAt (suitOffset card) foundation)
+    thisSuit = head $ snd $ splitAt (suitOffset card) foundation
   if rank card == Ace
   then null thisSuit
-  else (pred . rank) card == (rank . head) thisSuit
+  else (pred $ rank card) == (rank . head) thisSuit
   
 -- Items below are not exported:
 
@@ -46,7 +46,7 @@ manageCard :: (Pile -> Pile) ->
 manageCard f foundation card = do
   let
     (before,rest) = splitAt (suitOffset card) foundation
-  before ++ [(f (head rest))] ++ tail rest 
+  before ++ [(f $ head rest)] ++ tail rest 
    
 suitOffset :: Card -> Int
-suitOffset card = (fromEnum . suit) card
+suitOffset card = fromEnum $ suit card
