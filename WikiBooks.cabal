@@ -10,29 +10,29 @@ extra-source-files:
 executable WikiBooks
     main-is: Main.hs
     other-modules:
-        IntermediateHaskell.Indentation
-        IntermediateHaskell.StandalonePrograms
-        IntermediateHaskell.OtherDataStructures
-        IntermediateHaskell.HaskelModules
-        IntermediateHaskell.ClassesAndTypes
-        ElementaryHaskell.Recursion
-        ElementaryHaskell.Lists2
-        ElementaryHaskell.TypeDeclarations
-        ElementaryHaskell.ControlStructures
-        ElementaryHaskell.PatternMatching
-        ElementaryHaskell.Lists3
-        Monads.UnderstandMonads
-        Monads.DoNotation
         Monads.IoApplicativeFunctor
-        Solitaire.Location
-        Solitaire.Game
-        Solitaire.AnsiColor
+        Monads.DoNotation
+        Monads.UnderstandMonads
+        IntermediateHaskell.ClassesAndTypes
+        IntermediateHaskell.HaskelModules
+        IntermediateHaskell.Indentation
+        IntermediateHaskell.OtherDataStructures
+        IntermediateHaskell.StandalonePrograms
+        ElementaryHaskell.Lists3
+        ElementaryHaskell.PatternMatching
+        ElementaryHaskell.ControlStructures
+        ElementaryHaskell.Lists2
+        ElementaryHaskell.Recursion
+        ElementaryHaskell.TypeDeclarations
         Solitaire.Progress
+        Solitaire.Card
+        Solitaire.Foundation
+        Solitaire.Location
+        Solitaire.Action
+        Solitaire.AnsiColor
+        Solitaire.Game
         Solitaire.Stock
         Solitaire.Tableau
-        Solitaire.Action
-        Solitaire.Foundation
-        Solitaire.Card
     default-language: Haskell2010
     build-depends:
         base -any,
