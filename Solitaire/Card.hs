@@ -1,5 +1,7 @@
 module Solitaire.Card where
 
+import qualified System.Console.ANSI
+
 {-
   This describes the static behaviors of each of the
   52 cards in a deck.  Dynamic card information, such as
@@ -10,7 +12,33 @@ module Solitaire.Card where
 data Card = Card { suit :: Suit
   , rank :: Rank
   , color :: Color
-  } deriving (Show)
+  }
+  
+instance Show Card where
+  show (Card {suit = suit, rank = rank, color = color } ) = do
+    let
+      showSuit =
+        case suit of
+          Club -> "♣️"
+          Diamond -> "♦️"
+          Heart -> "❤️"
+          Spade -> "♠️"
+      showRank =
+        case rank of
+          Ace -> " A"
+          Two -> " 2"
+          Three -> " 3"
+          Four -> " 4"
+          Five -> " 5"
+          Six -> " 6"
+          Seven -> " 7"
+          Eight -> " 8"
+          Nine -> " 9"
+          Ten -> "10"
+          Jack -> " J"
+          Queen -> " Q"
+          King -> " K"
+    show (showRank ++ showSuit)
 
 data Rank -- from lowest to highest
   = Ace
