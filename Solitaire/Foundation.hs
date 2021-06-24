@@ -16,7 +16,9 @@ create = replicate (1 + fromEnum(maxBound :: Suit)) []
 -- Add card to matching suit card list
 addCard :: Foundation -> Card -> Foundation
 addCard foundation card =
-  manageCard (\b t a -> b ++ [card : t] ++ a) foundation card
+  manageCard add foundation card where
+    add (before, rest) =
+      before ++ [card : head rest] ++ tail rest
 
 -- Remove card from matching suit card list.
 -- NOTE: code does NOT check that card removed is
@@ -25,7 +27,9 @@ addCard foundation card =
 --       worry about this.
 removeCard :: Foundation -> Card -> Foundation
 removeCard foundation card =
-  manageCard (\b t a -> b ++ [tail t] ++ a) foundation card
+  manageCard remove foundation card where
+   remove (before,rest) =
+     before ++ [tail (head rest)] ++ tail rest
 
 -- Answer whether a card can be added to the foundation.
 -- True if Ace's corresponding list is empty
@@ -42,14 +46,10 @@ canReceiveCard foundation card = do
   
 -- Items below are not exported:
 
-manageCard :: ([Pile] -> Pile -> [Pile] -> Foundation) ->
+manageCard :: (([Pile],[Pile]) -> Foundation) ->
   Foundation -> Card -> Foundation
-manageCard f foundation card = do
-  let
-    (beforeSuits, rest) = splitAt (suitOffset card) foundation
-    thisSuit = head rest
-    afterSuits = tail rest
-  f beforeSuits thisSuit afterSuits
+manageCard f foundation card =
+    f (splitAt (suitOffset card) foundation)
    
 suitOffset :: Card -> Int
 suitOffset card = (fromEnum . suit) card
